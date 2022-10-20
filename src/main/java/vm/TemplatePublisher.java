@@ -1,9 +1,16 @@
 package vm;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Properties;
+import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.velocity.VelocityContext;
@@ -13,11 +20,14 @@ import org.json.JSONObject;
 
 public class TemplatePublisher {
     protected VelocityEngine velocity;
+    protected Properties props;
 
-    public TemplatePublisher() {
+    public TemplatePublisher(Properties appProps) {
         // init velocity
         velocity = new VelocityEngine();
         velocity.init();
+        // config
+        props = appProps;
     }
 
     /**
@@ -49,6 +59,33 @@ public class TemplatePublisher {
         String f_name = f.substring(0, i);
         String r_name = r.substring(0, j);
         return r_name + "_" + f_name + "." + newExtension;
+    }
+
+    /**
+     * Adds a link to XSD schema in ./data folder to generated XLS file
+     * 
+     * @param fname name of xls file
+     * @throws IOException
+     */
+    public void AddSchemaLinkToXML(String fname) throws IOException {
+        String filePath = "./data/result/" + fname;
+        BufferedReader file = new BufferedReader(new FileReader(new File(filePath), StandardCharsets.UTF_8));
+        String line;
+        String input = "";
+
+        int k = 0;
+        while ((line = file.readLine()) != null) {
+            input += line + System.lineSeparator();
+            if (k == 0)
+                input += "<?xml-model href=\"../schema.xsd\"?>" + System.lineSeparator();
+            k = k + 1;
+        }
+
+        FileOutputStream os = new FileOutputStream(new File(filePath));
+        os.write(input.getBytes(StandardCharsets.UTF_8));
+
+        file.close();
+        os.close();
     }
 
     /**
@@ -93,6 +130,12 @@ public class TemplatePublisher {
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        // if xml and config, add line to output
+        if (resultExt == "xml" &&
+                props.getProperty("AddSchemaLinkToXML").equals("true")) {
+            AddSchemaLinkToXML(result);
         }
 
         return result;

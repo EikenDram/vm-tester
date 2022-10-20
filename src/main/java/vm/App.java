@@ -1,9 +1,11 @@
 package vm;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Properties;
 
 /**
  * Main app
@@ -63,13 +65,17 @@ public class App {
             for (File r : requests()) {
                 System.out.println(String.format("Processing request: %s:", r.getName()));
 
+                // read application properties
+                Properties appProps = new Properties();
+                appProps.load(new FileInputStream("./app.properties"));
+
                 // create result directory if doesnt exist
                 Files.createDirectories(Paths.get("./data/result"));
 
                 // search for pdf templates and process them
                 for (File f : vmPDF()) {
                     System.out.println(String.format("Generating pdf from template %s...", f.getName()));
-                    String resultPDF = new TemplatePublisher().publish(r, f, "json");
+                    String resultPDF = new TemplatePublisher(appProps).publish(r, f, "json");
                     System.out.println(String.format("Result file: %s", resultPDF));
                     // 2D: check for valid json file as result
                     // or can check with vscode by opening file
@@ -78,7 +84,7 @@ public class App {
                 // search for xml templates and process them
                 for (File f : vmXML()) {
                     System.out.println(String.format("Generating xml from template %s...", f.getName()));
-                    String resultXML = new TemplatePublisher().publish(r, f, "xml");
+                    String resultXML = new TemplatePublisher(appProps).publish(r, f, "xml");
                     System.out.println(String.format("Result file: %s", resultXML));
                     // 2D: check if result file is valid xml
                     // 2D: check if xml validates schema.xsd

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 #set($birthDate = $dateTool.format('yyyy-MM-dd',$dateTool.toDate('dd.MM.yyyy',$cPersonPD['storedValues']['birthDate'])))
-
-<tns:formData xmlns="test"  xmlns:tns="test" oktmo="0" deliveryType="epgu">
+<tns:formData xmlns="test" xmlns:tns="test" oktmo="0" deliveryType="epgu">
     <tns:dataRequest>
         <tns:currentDate>$dateTool.get('yyyy-MM-dd')</tns:currentDate>
 		<tns:orderId>$orderId</tns:orderId>

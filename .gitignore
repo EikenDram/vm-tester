@@ -32,3 +32,4 @@ data/vm/*.vm
 !data/vm/pdf_0_Applicant.vm
 data/request/*.json
 !data/request/request.json
+data/schema.xsd
