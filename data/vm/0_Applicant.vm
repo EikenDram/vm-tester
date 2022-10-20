@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:formData xmlns=""  xmlns:tns="" oktmo="0" deliveryType="epgu">
+    <tns:dataRequest>
+        <tns:currentDate>$dateTool.get('yyyy-MM-dd')</tns:currentDate>
+		<tns:orderId>$orderId</tns:orderId>
+        <tns:territoryOrgan code="01">ПФР</tns:territoryOrgan>
+        <tns:additionalInfo>false</tns:additionalInfo>
+    </tns:dataRequest>
+</tns:formData>

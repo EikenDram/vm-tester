@@ -1,0 +1,45 @@
+{
+  "cInfo": {
+    "visited": true
+  },
+  "cIssuerType": {
+    "visited": true,
+    "value": "represent"
+  },
+  "cReprCategory": {
+    "visited": true,
+    "value": "family"
+  },
+  "cPaymentSelect": {
+    "visited": true,
+    "value": "bank"
+  },
+  "cPersonInfo": {
+    "visited": true
+  },
+  "cPersonPD": {
+    "visited": true,
+    "value": {
+      "storedValues": {
+        "firstName": "Фамилия",
+        "lastName": "Имя",
+        "middleName": "Отчество",
+        "birthDate": "11.08.2002",
+        "birthPlace": "Село Нарсатуй Мухоршибирского района Бурятской АССР",
+        "gender": "M",
+        "genderFull": "Мужской",
+        "docType": "RF_PASSPORT",
+        "rfPasportSeries": "5555",
+        "rfPasportNumber": "000000",
+        "rfPasportIssueDate": "01.01.2021",
+        "rfPasportIssuedBy": "ГУ МВД России по г. Москве",
+        "rfPasportIssuedById": "00000",
+        "rfPasportIssuedByIdFormatted": "000-000",
+        "citizenship": "РОССИЯ",
+        "citizenshipCode": "RUS",
+        "snils": "000-000-000 00"
+      },
+      "errors": []
+    }
+  }
+}
