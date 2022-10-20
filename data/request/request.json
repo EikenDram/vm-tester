@@ -21,8 +21,8 @@
     "visited": true,
     "value": {
       "storedValues": {
-        "firstName": "Фамилия",
-        "lastName": "Имя",
+        "firstName": "Имя",
+        "lastName": "Фамилия",
         "middleName": "Отчество",
         "birthDate": "11.08.2002",
         "birthPlace": "Село Нарсатуй Мухоршибирского района Бурятской АССР",

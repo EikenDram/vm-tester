@@ -1,1 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="test" targetNamespace="test" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xsd:simpleType name="stringNN-11">
+        <xsd:restriction base="xsd:normalizedString">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="11" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="stringNN-20">
+        <xsd:restriction base="xsd:normalizedString">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="20" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="stringNN-50">
+        <xsd:restriction base="xsd:normalizedString">
+            <xsd:minLength value="1" />
+            <xsd:maxLength value="50" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-6">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="6" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-9">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="9" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-10">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="10" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-12">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="12" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-14">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="14" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-15">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="15" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-19">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="19" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-20">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="20" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-30">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="30" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-50">
+        <xsd:annotation>
+            <xsd:documentation />
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="50" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-200">
+        <xsd:annotation>
+            <xsd:documentation />
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="200" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-256">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="256" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-500">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="500" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-1000">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4000" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-1024">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="1024" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="string-4000">
+        <xsd:restriction base="xsd:string">
+            <xsd:maxLength value="4000" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="deliveryTypeType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="ru">Способ подачи заявления</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="epgu">
+                <xsd:annotation>
+                    <xsd:documentation>Через ЕПГУ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="mfc">
+                <xsd:annotation>
+                    <xsd:documentation>Через МФЦ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="genderType">
+        <xsd:annotation>
+            <xsd:documentation>Пол</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="Мужской" />
+            <xsd:enumeration value="Женский" />
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="dataElementType">
+        <xsd:simpleContent>
+            <xsd:extension base="tns:string-500">
+                <xsd:attribute name="code" type="tns:string-50" use="required" />
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="personInfoType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Сведения о заявителе 
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="applicantKind" type="tns:dataElementType">
+                <xsd:annotation>
+                    <xsd:documentation>Категория заявителя</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="lastname" type="tns:string-256" />
+            <xsd:element name="firstName" type="tns:string-256" />
+            <xsd:element name="middleName" type="tns:string-256" minOccurs="0" />
+            <xsd:element name="birthday" type="xsd:date" />
+            <xsd:element name="snils" type="tns:string-14" />
+            <xsd:element name="gender" type="tns:genderType" minOccurs="0" />
+            <xsd:element name="citizenship" type="tns:dataElementType" minOccurs="0" />
+            <xsd:element name="birthPlace" type="tns:string-1024" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="formDataType">
+        <xsd:annotation>
+            <xsd:documentation>
+                Отправка запроса на назначение выплаты/ изменение реквизитов
+        </xsd:documentation>
+        </xsd:annotation>
+        <xsd:choice>
+            <xsd:element name="dataRequest" type="tns:dataRequest" />
+        </xsd:choice>
+        <xsd:attribute name="oktmo" type="tns:stringNN-11" use="required" />
+        <xsd:attribute name="deliveryType" type="tns:deliveryTypeType" use="required" />
+        <xsd:attribute name="mfcId" type="tns:string-50" />
+        <xsd:attribute name="mfcName" type="tns:string-200" />
+    </xsd:complexType>
+    <xsd:complexType name="dataRequest">
+        <xsd:annotation>
+            <xsd:documentation>Данные формы заявления на назначение меры социальной поддержки</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="currentDate" type="xsd:date" />
+            <xsd:element name="orderId" type="tns:stringNN-50" />
+            <xsd:element name="regionFinal" type="tns:string-256" minOccurs="0" />
+            <xsd:element name="departmentId" type="tns:string-256" minOccurs="0" />
+            <xsd:element name="serviceId" type="tns:string-256" minOccurs="0" />
+            <xsd:element name="territoryOrgan" type="tns:dataElementType" minOccurs="0" />
+            <xsd:element name="applicantInfo" type="tns:personInfoType">
+                <xsd:annotation>
+                    <xsd:documentation>Сведения о заявителе</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="dopInfo" type="tns:string-256" minOccurs="0" />
+            <xsd:element name="dopInformation" type="tns:string-256" minOccurs="0" />
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:element name="formData" type="tns:formDataType" />
+</xsd:schema>

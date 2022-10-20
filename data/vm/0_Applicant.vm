@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+#set($birthDate = $dateTool.format('yyyy-MM-dd',$dateTool.toDate('dd.MM.yyyy',$cPersonPD['storedValues']['birthDate'])))
+
 <tns:formData xmlns="test"  xmlns:tns="test" oktmo="0" deliveryType="epgu">
     <tns:dataRequest>
         <tns:currentDate>$dateTool.get('yyyy-MM-dd')</tns:currentDate>
 		<tns:orderId>$orderId</tns:orderId>
         <tns:territoryOrgan code="01">test</tns:territoryOrgan>
-        <tns:additionalInfo>false</tns:additionalInfo>
+        <tns:applicantInfo>
+            <tns:applicantKind code="1">Test</tns:applicantKind>
+            <tns:lastname>$cPersonPD['storedValues']['lastName']</tns:lastname>
+            <tns:firstName>$cPersonPD['storedValues']['firstName']</tns:firstName>
+            <tns:middleName>$cPersonPD['storedValues']['middleName']</tns:middleName>
+            <tns:birthday>$birthDate</tns:birthday>
+            <tns:snils>$cPersonPD['storedValues']['snils']</tns:snils>
+            <tns:birthPlace>$cPersonPD['storedValues']['birthPlace']</tns:birthPlace>
+        </tns:applicantInfo>
     </tns:dataRequest>
 </tns:formData>

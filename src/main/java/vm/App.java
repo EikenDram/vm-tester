@@ -56,6 +56,9 @@ public class App {
     }
 
     public static void main(String[] args) {
+        // ask if user wants to add link to schema.xsd in ./data folder so vscode could
+        // automatically validate xml schema
+
         try {
             for (File r : requests()) {
                 System.out.println(String.format("Processing request: %s:", r.getName()));
@@ -69,7 +72,7 @@ public class App {
                     String resultPDF = new TemplatePublisher().publish(r, f, "json");
                     System.out.println(String.format("Result file: %s", resultPDF));
                     // 2D: check for valid json file as result
-                    // also check there's no final comma in array cuz then pdf generator breaks
+                    // or can check with vscode by opening file
                 }
 
                 // search for xml templates and process them
@@ -77,8 +80,8 @@ public class App {
                     System.out.println(String.format("Generating xml from template %s...", f.getName()));
                     String resultXML = new TemplatePublisher().publish(r, f, "xml");
                     System.out.println(String.format("Result file: %s", resultXML));
-                    // 2D: need to check if result file is valid xml
-                    // also check if xml validates schema.xsd
+                    // 2D: check if result file is valid xml
+                    // 2D: check if xml validates schema.xsd
                 }
             }
 
