@@ -2,9 +2,9 @@
 
 ## Tester tool for .vm templates
 
-Creates result files from velocity templates in <code>data/vm</code> directory, for each of the \*.json file loaded into velocity context from <code>data/request</code> directory
+Creates result files in <code>data/result</code> directory from velocity templates in <code>data/vm</code> directory, for each of the \*.json files loaded into velocity context from <code>data/request</code> directory
 
-<code>data/global.json</code> contains global variables for context shared between all requests
+<code>data/global.json</code> contains global variables in context shared between all requests
 
 ## Development
 
