@@ -22,3 +22,13 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# data directory with result
+data/result/*.*
+
+# all but template requests and vms
+data/vm/*.vm
+!data/vm/0_Applicant.vm
+!data/vm/pdf_0_Applicant.vm
+data/request/*.json
+!data/request/request.json

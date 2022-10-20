@@ -5,13 +5,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
-import java.io.*;
-import java.nio.charset.*;
-import org.apache.commons.io.*;
+import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.tools.generic.DateTool;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -25,53 +24,6 @@ public class TemplatePublisher {
     }
 
     /**
-     * Retrieve a value from a property using
-     * 
-     * @param obj          The object who's property you want to fetch
-     * @param property     The property name
-     * @param defaultValue A default value to be returned if either a) The property
-     *                     is
-     *                     not found or b) if the property is found but the value is
-     *                     null
-     * @return THe value of the property
-     */
-    public static <T> T getProperty(Object obj, String property, T defaultValue) {
-
-        T returnValue = (T) getProperty(obj, property);
-        if (returnValue == null) {
-            returnValue = defaultValue;
-        }
-
-        return returnValue;
-
-    }
-
-    /**
-     * Fetch a property from an object. For example of you wanted to get the foo
-     * property on a bar object you would normally call {@code bar.getFoo()}. This
-     * method lets you call it like {@code BeanUtil.getProperty(bar, "foo")}
-     * 
-     * @param obj      The object who's property you want to fetch
-     * @param property The property name
-     * @return The value of the property or null if it does not exist.
-     */
-    public static Object getProperty(Object obj, String property) {
-        Object returnValue = null;
-
-        try {
-            String methodName = "get" + property.substring(0, 1).toUpperCase()
-                    + property.substring(1, property.length());
-            Class clazz = obj.getClass();
-            Method method = clazz.getMethod(methodName, null);
-            returnValue = method.invoke(obj, null);
-        } catch (Exception e) {
-            // Do nothing, we'll return the default value
-        }
-
-        return returnValue;
-    }
-
-    /**
      * Loads JSON object from json file
      * 
      * @param jsonFile json file
@@ -82,22 +34,6 @@ public class TemplatePublisher {
             throw new NullPointerException("Cannot find resource file " + jsonFile.getName());
         }
 
-        InputStream is = new FileInputStream(jsonFile);
-        JSONTokener tokener = new JSONTokener(is);
-        return new JSONObject(tokener);
-    }
-
-    public JSONObject getJson2(File jsonFile) throws IOException {
-        if (!jsonFile.exists()) {
-            throw new NullPointerException("Cannot find resource file " + jsonFile.getName());
-        }
-
-        // InputStream is = new FileInputStream(jsonFile);
-
-        // JSONTokener tokener = new JSONTokener(is);
-        // String content = new Scanner(jsonFile).useDelimiter("\\Z").next();
-
-        // String content = toString(jsonFile);
         String content = FileUtils.readFileToString(jsonFile, StandardCharsets.UTF_8);
         return new JSONObject(content);
     }
@@ -128,6 +64,7 @@ public class TemplatePublisher {
      */
     public String publish(File requestFile, File templateFile, String resultExt) throws IOException {
         VelocityContext context = new VelocityContext();
+        context.put("dateTool", new DateTool());
 
         // global variables
         JSONObject jsonGlobal = getJson(new File("./data/global.json"));
@@ -137,7 +74,7 @@ public class TemplatePublisher {
 
         // request json from getNextStep -> scenarioDto.applicantAnswers
         try {
-            JSONObject jsonRequest = getJson2(requestFile);
+            JSONObject jsonRequest = getJson(requestFile);
             for (String key : jsonRequest.keySet()) {
                 JSONObject root = jsonRequest.getJSONObject(key);
                 if (root.has("value")) {
