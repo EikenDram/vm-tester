@@ -2,6 +2,8 @@ package vm;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Main app
@@ -25,6 +27,7 @@ public class App {
 
     /**
      * List of files with *_Applicant.vm template in data/vm/ folder
+     * 
      * @return List of files
      */
     public static File[] vmXML() {
@@ -39,6 +42,7 @@ public class App {
 
     /**
      * List of .json requests in data/request/ folder
+     * 
      * @return
      */
     public static File[] requests() {
@@ -55,6 +59,9 @@ public class App {
         try {
             for (File r : requests()) {
                 System.out.println(String.format("Processing request: %s:", r.getName()));
+
+                // create result directory if doesnt exist
+                Files.createDirectories(Paths.get("./data/result"));
 
                 // search for pdf templates and process them
                 for (File f : vmPDF()) {

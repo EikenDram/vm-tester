@@ -1,9 +1,7 @@
 package vm;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
@@ -12,7 +10,6 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.tools.generic.DateTool;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 
 public class TemplatePublisher {
     protected VelocityEngine velocity;
