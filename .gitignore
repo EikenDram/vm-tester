@@ -33,3 +33,4 @@ data/vm/*.vm
 data/request/*.json
 !data/request/request.json
 data/schema.xsd
+data/*.xsd

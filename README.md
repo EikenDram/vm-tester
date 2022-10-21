@@ -36,7 +36,7 @@ AddSchemaLinkToXML - set to true (default) if you want to have resulted xml file
 
 6. Place vm templates in <code>data/vm/</code> directory
 
-7. Create necessary <code>.json</code> files in <code>data/request/</code> directory filled with <code>scenarioDto.applicantAnswers</code> values from final <code>getNextStep</code> requests
+7. Create necessary <code>.json</code> files in <code>data/request/</code> directory filled with <code>scenarioDto.applicantAnswers</code> values (possibly united with <code>scenarioDto.currentValue</code> depending on the final screens) from final <code>getNextStep</code> requests. <code>json</code> files should have valid structure: remove external <code>"</code> and <code>\\</code> symbols from structures inside <code>"value"</code> fields after copying structure from DevTools
 
 8. Run application with <code>F5</code>
 
