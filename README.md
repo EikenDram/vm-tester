@@ -24,11 +24,11 @@ AddSchemaLinkToXML - set to true (default) if you want to have resulted xml file
 
 ## Tutorial
 
-1. Have JDK >= 1.8 installed on pc
+1. Have java >= 1.8 installed on pc
 
-2. Open root directory in Visual Studio Code
+2. Copy source code directory
 
-3. Install java extension <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">vscjava.vscode-java-pack</a>
+3. Copy released vm-tester.jar to root of source code directory
 
 4. Fill <code>data/global.json</code> with required global variables
 
@@ -38,7 +38,7 @@ AddSchemaLinkToXML - set to true (default) if you want to have resulted xml file
 
 7. Create necessary <code>.json</code> files in <code>data/request/</code> directory filled with <code>scenarioDto.applicantAnswers</code> values (possibly united with <code>scenarioDto.currentValue</code> depending on the final screens) from final <code>getNextStep</code> requests. <code>json</code> files should have valid structure: remove external <code>"</code> and <code>\\</code> symbols from structures inside <code>"value"</code> fields after copying structure from DevTools
 
-8. Run application with <code>F5</code>
+8. Run application with <code>java -jar vm-tester.jar</code> command in root directory
 
 9. Resulted files will be generated in <code>data/result/</code> directory
 
@@ -47,3 +47,13 @@ AddSchemaLinkToXML - set to true (default) if you want to have resulted xml file
 11. <code>XML</code> files by default will have a link to <code>data/schema.xsd</code> and can be validated by opening the file in Visual Studio Code with installed <a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml">redhat.vscode-xml</a> extension
 
 12. To remove link from resulted <code>XML</code> files edit <code>app.properties</code> file in root directory and change <code>AddSchemaLinkToXML</code> value to <code>false</code>
+
+## Debug
+
+1. Have JDK >= 1.8 installed on pc
+
+2. Open root directory in Visual Studio Code
+
+3. Install java extension <a href="https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack">vscjava.vscode-java-pack</a>
+
+4. Run application with <code>F5</code>
