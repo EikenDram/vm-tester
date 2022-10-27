@@ -2,9 +2,11 @@ package vm;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
@@ -66,7 +68,8 @@ public class TemplatePublisher {
      */
     public void AddSchemaLinkToXML(String fname) throws IOException {
         String filePath = "./data/result/" + fname;
-        BufferedReader file = new BufferedReader(new FileReader(new File(filePath), StandardCharsets.UTF_8));
+        // java 1.8 version
+        BufferedReader file = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filePath)), StandardCharsets.UTF_8));
         String line;
         String input = "";
 
