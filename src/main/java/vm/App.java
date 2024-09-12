@@ -43,6 +43,21 @@ public class App {
     }
 
     /**
+     * List of files with *_Applicant.vm template in data/vm/ folder
+     * 
+     * @return List of files
+     */
+    public static File[] tXML() {
+        File folder = new File("./data/vm/");
+        File[] matchingFiles = folder.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.startsWith("t_") && name.endsWith(".vm");
+            }
+        });
+        return matchingFiles;
+    }
+
+    /**
      * List of .json requests in data/request/ folder
      * 
      * @return
@@ -75,7 +90,7 @@ public class App {
                 // search for pdf templates and process them
                 for (File f : vmPDF()) {
                     System.out.println(String.format("Generating pdf from template %s...", f.getName()));
-                    String resultPDF = new TemplatePublisher(appProps).publish(r, f, "json");
+                    String resultPDF = new TemplatePublisher(appProps).publish(r, f, "json", null);
                     System.out.println(String.format("Result file: %s", resultPDF));
                     // 2D: check for valid json file as result
                     // or can check with vscode by opening file
@@ -84,8 +99,17 @@ public class App {
                 // search for xml templates and process them
                 for (File f : vmXML()) {
                     System.out.println(String.format("Generating xml from template %s...", f.getName()));
-                    String resultXML = new TemplatePublisher(appProps).publish(r, f, "xml");
+                    String resultXML = new TemplatePublisher(appProps).publish(r, f, "xml", "schema");
                     System.out.println(String.format("Result file: %s", resultXML));
+                    // 2D: check if result file is valid xml
+                    // 2D: check if xml validates schema.xsd
+                }
+
+                // search for transport templates and process them
+                for (File f : tXML()) {
+                    System.out.println(String.format("Generating transport xml from template %s...", f.getName()));
+                    String resultT = new TemplatePublisher(appProps).publish(r, f, "xml", "t");
+                    System.out.println(String.format("Result file: %s", resultT));
                     // 2D: check if result file is valid xml
                     // 2D: check if xml validates schema.xsd
                 }

@@ -66,7 +66,7 @@ public class TemplatePublisher {
      * @param fname name of xls file
      * @throws IOException
      */
-    public void AddSchemaLinkToXML(String fname) throws IOException {
+    public void AddSchemaLinkToXML(String fname, String schema) throws IOException {
         String filePath = "./data/result/" + fname;
         // java 1.8 version
         BufferedReader file = new BufferedReader(new InputStreamReader(new FileInputStream(new File(filePath)), StandardCharsets.UTF_8));
@@ -77,7 +77,7 @@ public class TemplatePublisher {
         while ((line = file.readLine()) != null) {
             input += line + System.lineSeparator();
             if (k == 0)
-                input += "<?xml-model href=\"../schema.xsd\"?>" + System.lineSeparator();
+                input += "<?xml-model href=\"../"+ schema +".xsd\"?>" + System.lineSeparator();
             k = k + 1;
         }
 
@@ -96,7 +96,7 @@ public class TemplatePublisher {
      * @return name of result file
      * @throws IOException
      */
-    public String publish(File requestFile, File templateFile, String resultExt) throws IOException {
+    public String publish(File requestFile, File templateFile, String resultExt, String schema) throws IOException {
         VelocityContext context = new VelocityContext();
         context.put("dateTool", new DateTool());
 
@@ -135,7 +135,13 @@ public class TemplatePublisher {
         // if xml and config, add line to output
         if (resultExt == "xml" &&
                 props.getProperty("AddSchemaLinkToXML").equals("true")) {
-            AddSchemaLinkToXML(result);
+            AddSchemaLinkToXML(result, schema);
+        }
+
+        // if xml and config, add line to output
+        if (resultExt == "t" &&
+                props.getProperty("AddSchemaLinkToXML").equals("true")) {
+            AddSchemaLinkToXML(result, schema);
         }
 
         return result;
